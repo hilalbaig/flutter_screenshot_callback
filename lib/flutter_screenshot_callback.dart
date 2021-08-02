@@ -33,7 +33,7 @@ class ScreenshotCallback {
     switch (call.method) {
       case NATIVE_SCREENSHOT_CALLBACK:
         {
-          String? path = call.arguments;
+          String path = call.arguments ?? "";
           print("截图回调，path是：$path");
           _iScreenshotCallback?.screenshotCallback(path);
         }
@@ -48,20 +48,18 @@ class ScreenshotCallback {
     // return returnResult();
   }
 
-  void setInterfaceScreenshotCallback(IScreenshotCallback iScreenshotCallback){
+  void setInterfaceScreenshotCallback(IScreenshotCallback iScreenshotCallback) {
     _iScreenshotCallback = iScreenshotCallback;
   }
 
   void startScreenshot() async =>
-    await _channel.invokeMethod(FLUTTER_START_SCREENSHOT);
+      await _channel.invokeMethod(FLUTTER_START_SCREENSHOT);
 
   void stopScreenshot() async =>
       await _channel.invokeMethod(FLUTTER_STOP_SCREENSHOT);
-
-
 }
 
 abstract class IScreenshotCallback {
-  screenshotCallback(String? data);
+  screenshotCallback(String data);
   deniedPermission();
 }
