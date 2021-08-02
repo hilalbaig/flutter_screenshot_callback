@@ -20,7 +20,7 @@ class ScreenshotCallback {
   static const String NATIVE_SCREENSHOT_CALLBACK = "screenshotCallback";
   static const String NATIVE_DENIED_PERMISSION = "deniedPermission";
 
-  IScreenshotCallback _iScreenshotCallback;
+  IScreenshotCallback? _iScreenshotCallback;
 
   List<IScreenshotCallback> onCallbacks = <IScreenshotCallback>[];
 
@@ -33,7 +33,7 @@ class ScreenshotCallback {
     switch (call.method) {
       case NATIVE_SCREENSHOT_CALLBACK:
         {
-          String path = call.arguments;
+          String? path = call.arguments;
           print("截图回调，path是：$path");
           _iScreenshotCallback?.screenshotCallback(path);
         }
@@ -62,6 +62,6 @@ class ScreenshotCallback {
 }
 
 abstract class IScreenshotCallback {
-  screenshotCallback(String data);
+  screenshotCallback(String? data);
   deniedPermission();
 }
